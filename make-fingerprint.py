@@ -31,7 +31,7 @@ def custom_legend(colors, labels, legend_location='upper left', legend_boundary=
 
 # Add command line arguments. To see them, run "python scriptname.py --help"
 parser = argparse.ArgumentParser(description='Process a packet capture.')
-parser.add_argument('--filename', default='finger.csv', help='Name of packet capture file.')
+parser.add_argument('--filename', default='facebook.csv', help='Name of packet capture file.')
 parser.add_argument('--ip', default='192.168.3.100', help='IP address of client.')
 
 print(1)
@@ -43,7 +43,7 @@ ip = args.ip
 sizelist = []
 
 # Open packet capture file and read it in and then close it
-with open(filename, 'rb') as csvfile:
+with open(filename, 'rt', encoding="UTF8") as csvfile:
     filereader = csv.reader(csvfile, delimiter=',')
     for row in filereader:
         # Identify direction
@@ -176,9 +176,9 @@ sns.despine()
 print('b')
 plt.figure()
 print('c')
-sns_plot = sns.FacetGrid(df, col='Header', sharex="row", sharey=False)
+sns_plot = sns.FacetGrid(data=df, col='Header', sharex="row", sharey=False)
 print('d')
-sns_plot.map(sns.barplot, 'Index', 'Value').set_titles('{col_name}')
+sns_plot.map(sns.barplot).set_titles('{col_name}')
 print('e')
 sns_plot.set(xticks=[])
 print('f')
@@ -284,4 +284,4 @@ plt.savefig(filename + "-fingerprint-table.pdf")
 
 print(15)
 
-print packetList
+print(packetList)
